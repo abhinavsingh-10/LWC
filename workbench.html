@@ -1,0 +1,79 @@
+<template>
+    <lightning-card>
+        
+        <div class="slds-m-around_medium">
+    <div class="slds-card">
+        <h1 class="slds-card__header-title slds-align_absolute-center">Picklist Type Fields</h1>
+    </div>
+</div>
+
+<div class="slds-m-around_medium">
+    <div class="slds-card">
+        <lightning-combobox name="ObjectList" label='Select Object' options={objectList} onchange={handleObject}
+            placeholder="Select Object"></lightning-combobox>
+    </div>
+</div>
+
+<div class="slds-m-around_medium">
+    <lightning-dual-listbox name="Fields" label="Select Fields" source-label="Available" selected-label="Selected"
+        field-level-help="Select your Fields" options={lstOfPicklistFields} onchange={handleFieldValues} size="4">
+    </lightning-dual-listbox>
+    </div>
+
+
+    <div class="slds-m-around_medium">
+    <div>
+        <lightning-button variant="brand" label="Genrate Query" title="Brand action" onclick={genratequery}>
+        </lightning-button>
+    </div>
+    </div>
+    
+    <div class="slds-m-around_medium">
+    <div class="slds-box">
+        <div class="row slds-box">
+            <lightning-textarea name="input1" value={query} label="Enter SOQL Query"></lightning-textarea>
+        </div>
+        </div>
+
+        <div class="slds-m-around_medium">
+        <lightning-button variant="brand" label="Fetch Record" title="Brand action" onclick={fetchrecord}>
+        </lightning-button>
+    </div>
+    </div>
+    <!--Tabel For Record-->
+    <div class="slds-m-around_medium">
+    <div class="slds-col slds-size--1-of-1 slds-small-size--1-of-4 slds-medium-size--3-of-4">
+    
+        <template if:true={showRecord}>
+            <b>
+                <h2 class="header">List Of Record to Display</h2>
+            </b>
+            <div class="slds-box">
+    
+                <table class="slds-table slds-table--bordered slds-table--striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <span class="slds-truncate">Id</span>
+                            </th>
+                            <th scope="col">
+                                <span class="slds-truncate">Record Name</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={dataList} for:item="obj">
+                            <tr key={obj}>
+                                <td>{obj.Id}</td>
+                                <td>{obj.Name}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+    
+    </div>
+</div>
+    </lightning-card>
+</template>
